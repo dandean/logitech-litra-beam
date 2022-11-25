@@ -1,0 +1,5 @@
+## THING
+
+```
+brew install hidapi
+```
