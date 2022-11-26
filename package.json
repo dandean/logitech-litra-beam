@@ -1,17 +1,23 @@
 {
   "name": "usb",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "Library for controlling a Logitech Litra Beam light",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ts-mocha -p tsconfig.json src/**/*.spec.ts"
   },
-  "author": "",
+  "author": "Dan Dean <me@dandean.com>",
   "license": "ISC",
   "dependencies": {
+    "hid": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/hid": "^1.0.0",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.9",
-    "hid": "^1.0.1",
+    "mocha": "^10.1.0",
     "prettier": "^2.8.0",
+    "ts-mocha": "^10.0.0",
     "typescript": "^4.9.3"
   }
 }
