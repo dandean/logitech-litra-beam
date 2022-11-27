@@ -27,5 +27,14 @@
   },
   "scripts": {
     "prepublish": "tsc"
-  }
+  },
+  "keywords": [
+    "logitech",
+    "litra beam",
+    "litra",
+    "lights",
+    "streaming",
+    "USB",
+    "HID"
+  ]
 }
