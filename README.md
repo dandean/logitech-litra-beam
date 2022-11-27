@@ -47,7 +47,7 @@ Here's a quick example to show how it works. This will:
 - wait 10 seconds, and then turn it off
 
 ```ts
-import { LitraBeam } from 'litra-beam';
+import { LitraBeam } from 'logitech-litra-beam';
 
 const light = new LitraBeam();
 
