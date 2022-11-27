@@ -1,6 +1,13 @@
 import { DeviceDescriptor, enumerate, OpaqueDevice, open, write } from 'hid';
 
+/**
+ * The message for turning the light on.
+ */
 export const ON = Buffer.from([0, 0x11, 0xff, 0x04, 0x1d, 0x01]);
+
+/**
+ * The message for turning the light off.
+ */
 export const OFF = Buffer.from([0, 0x11, 0xff, 0x04, 0x1d, 0x00]);
 
 export const WARM = 2700;
@@ -8,16 +15,6 @@ export const COOL = 6500;
 export const NEUTRAL = (COOL - WARM) / 2 + WARM;
 
 export class LitraBeam {
-  /**
-   * Logitech's vendor ID
-   */
-  readonly #vendorId = 1133;
-
-  /**
-   * Litra Beam's product ID
-   */
-  readonly #productId = 51457;
-
   /**
    * A Litra Beam device descriptor
    */
@@ -32,23 +29,32 @@ export class LitraBeam {
     // Get all HIDs and look for one with Litra's vendor ID and product ID.
     // Then filter that down to the one with a specific serial number, if given,
     // or the first Litra found.
-    this.#descriptor = enumerate(this.#vendorId, this.#productId).find(
-      (device) => {
-        if (this.serialNumber) {
-          return device.serial_number === this.serialNumber;
-        }
-        return true;
+    this.#descriptor = this.getDescriptors().find((device) => {
+      if (this.serialNumber) {
+        return device.serial_number === this.serialNumber;
       }
-    );
+      return true;
+    });
 
     if (!this.#descriptor) {
       throw new Error('Litra Beam not connected');
     }
 
     this.#device = open(
-      this.#vendorId,
-      this.#productId,
+      this.#descriptor.vendor_id,
+      this.#descriptor.product_id,
       this.#descriptor.serial_number
+    );
+  }
+
+  /**
+   * Gets descriptors for all connected Litra Beams
+   */
+  public getDescriptors() {
+    return enumerate().filter(
+      (descriptor) =>
+        descriptor.product_string === 'Litra Beam' &&
+        Boolean(descriptor.serial_number)
     );
   }
 
