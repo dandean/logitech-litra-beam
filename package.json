@@ -2,14 +2,19 @@
   "name": "logitech-litra-beam",
   "version": "1.0.0",
   "description": "Library for controlling a Logitech Litra Beam light",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dandean/logitech-litra-beam.git"
+  },
   "main": "dist/main.js",
   "files": [
     "dist/"
   ],
-  "scripts": {
-    "test": "ts-mocha -p tsconfig.json src/**/*.spec.ts"
+  "author": {
+    "name": "Dan Dean",
+    "email": "me@dandean.com",
+    "url": "https://dandean.com"
   },
-  "author": "Dan Dean <me@dandean.com>",
   "license": "ISC",
   "dependencies": {
     "hid": "^1.0.1"
